@@ -1,0 +1,45 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build OpenCV Project",
+            "type": "shell",
+            "command": "C:/Program Files/mingw64/bin/g++.exe",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.exe",
+                "-I",
+                "F:/opencv/opencv/build/x64/install/include", // 头文件路径（不变）
+                // 新增：第一个-L指向有xfeatures2d的路径
+                "-L",
+                "F:/opencv/opencv/build/x64/MinGW/lib",
+                // 保留：第二个-L指向有opencv_world的路径
+                "-L",
+                "F:/opencv/opencv/build/x64/install/x64/mingw/lib",
+                // 链接库（顺序不影响，编译器会自动在两个-L路径中找）
+                "-lopencv_xfeatures2d4120",
+                "-lopencv_world4120",
+                "-std=c++17",
+                "-Wall",
+                "-DOPENCV_ENABLE_NONFREE=1"
+            ],
+            "options": {
+                "cwd": "${fileDirname}" // 工作目录正确：项目目录（test.cpp所在目录）
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true // 关键：设为默认任务，优先级最高
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "detail": "专门用于编译OpenCV项目的任务，包含完整的头文件和库文件配置"
+        }
+    ]
+}

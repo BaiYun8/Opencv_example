@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "MinGW-OpenCV",
+            "includePath": [
+                "${workspaceFolder}/**",
+                // 你的OpenCV头文件根目录（必须写到include，不要写到opencv2）
+                "F:/opencv/opencv/build/x64/install/include"
+            ],
+            "defines": [],
+            // 你的MinGW g++路径（用正斜杠，避免空格和转义问题）
+            "compilerPath": "C:/Program Files/mingw64/bin/g++.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64"
+        }
+    ],
+    "version": 4
+}
