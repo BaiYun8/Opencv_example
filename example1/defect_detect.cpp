@@ -55,6 +55,7 @@ int main(int argc, char** argv)
        //rectangle(src, rect, Scalar(0, 0, 255), 2, 8, 0);
        //drawContours(src, contours, t, Scalar(0, 0, 255), 2, 8);
     }
+    cout << "rects size = " << rects.size() << endl;
 
     sort_box(rects);
     tpl = binary(rects[1]);
@@ -105,8 +106,8 @@ void detect_defect(Mat &binary, vector<Rect> rects, vector<Rect> &defect)
         Mat se = getStructuringElement(MORPH_RECT, Size(3, 3), Point(-1, -1));
 		morphologyEx(mask, mask, MORPH_OPEN, se);
 		threshold(mask, mask, 0, 255, THRESH_BINARY);
-		//imshow("mask", mask);
-		//waitKey(0);
+		imshow("mask", mask);
+		waitKey(0);
 
         //统计差异像素数量
         int count = 0;
