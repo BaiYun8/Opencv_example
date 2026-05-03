@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 // 你的OpenCV头文件根目录（必须写到include，不要写到opencv2）
-                "F:/opencv/opencv/build/x64/install/include"
+                "F:/opencv/opencv/build/x64/install/include",
+                "F:/onnxruntime/onnxruntime-win-x64-gpu-1.16.3/onnxruntime-win-x64-gpu-1.16.3/include"
             ],
             "defines": [],
             // 你的MinGW g++路径（用正斜杠，避免空格和转义问题）

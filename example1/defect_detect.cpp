@@ -28,7 +28,9 @@ int main(int argc, char** argv)
     threshold(gray, binary, 0, 255, THRESH_BINARY_INV | THRESH_OTSU);
     imshow("binary", binary);
     // 定义结构元素并开运算
+    // 创建结构元素
     Mat se = getStructuringElement(MORPH_RECT, Size(3, 3), Point(-1, -1));
+    // 执行形态学开运算
     morphologyEx(binary, binary, MORPH_OPEN, se);
     imshow("binary2", binary);
 

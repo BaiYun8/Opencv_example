@@ -1,3 +1,4 @@
+/*
 {
     "version": "2.0.0",
     "tasks": [
@@ -10,16 +11,20 @@
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}.exe",
-                "-I",
-                "F:/opencv/opencv/build/x64/install/include", // 头文件路径（不变）
+
+                "-I","F:/opencv/opencv/build/x64/install/include", // 头文件路径（不变）
+                "-I", "F:/onnxruntime/onnxruntime-win-x64-gpu-1.16.3/onnxruntime-win-x64-gpu-1.16.3/include",
+
                 // 新增：第一个-L指向有xfeatures2d的路径
-                "-L",
-                "F:/opencv/opencv/build/x64/MinGW/lib",
+                "-L", "F:/opencv/opencv/build/x64/MinGW/lib",
+                "-L", "F:/onnxruntime/onnxruntime-win-x64-gpu-1.16.3/onnxruntime-win-x64-gpu-1.16.3/lib",
+
                 // 保留：第二个-L指向有opencv_world的路径
-                "-L",
-                "F:/opencv/opencv/build/x64/install/x64/mingw/lib",
+                "-L", "F:/opencv/opencv/build/x64/install/x64/mingw/lib",
                 // 链接库（顺序不影响，编译器会自动在两个-L路径中找）
+
                 "-lopencv_xfeatures2d4120",
+                "-lonnxruntime",
                 "-lopencv_world4120",
                 "-std=c++17",
                 "-Wall",
@@ -40,6 +45,41 @@
                 "panel": "shared"
             },
             "detail": "专门用于编译OpenCV项目的任务，包含完整的头文件和库文件配置"
+        }
+    ]
+}
+*/
+
+
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "MSVC 编译 OpenCV + ONNX",
+            "type": "shell",
+            "command": "cl.exe",
+            "args": [
+                "/EHsc",
+                "${file}",
+                "/Fe:${fileDirname}/${fileBasenameNoExtension}.exe",
+
+                "/I", "F:/opencv/opencv/build/x64/install/include",
+                "/I", "F:/onnxruntime/onnxruntime-win-x64-gpu-1.16.3/onnxruntime-win-x64-gpu-1.16.3/include",
+
+                "/link",
+                "/LIBPATH:F:/opencv/opencv/build/x64/install/x64/vc17/lib",
+                "/LIBPATH:F:/onnxruntime/onnxruntime-win-x64-gpu-1.16.3/onnxruntime-win-x64-gpu-1.16.3/lib",
+                "opencv_world4120.lib",
+                "onnxruntime.lib"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": ["$msCompile"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
